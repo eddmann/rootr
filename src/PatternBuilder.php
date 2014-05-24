@@ -64,7 +64,7 @@ class PatternBuilder
             $pattern .= '(' . $varPattern . ')';
         }
 
-        return [ '~^' . $pattern . '$~', $variables ];
+        return [ $pattern, $variables ];
     }
 
 }

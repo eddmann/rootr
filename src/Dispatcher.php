@@ -48,7 +48,7 @@ class Dispatcher
         $routes = $this->router->getVariableRoutes();
 
         foreach ($routes as $pattern => $methods) {
-            if (! preg_match($pattern, $uri, $matches)) {
+            if (! preg_match('~^' . $pattern . '$~', $uri, $matches)) {
                 continue;
             }
 
@@ -57,6 +57,10 @@ class Dispatcher
             }
 
             list($handler, $variables) = $methods[$method];
+
+            var_dump($matches);
+
+            var_dump($variables);
 
             $arguments = array_combine($variables, array_slice($matches, 1));
 

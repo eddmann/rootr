@@ -48,6 +48,31 @@ class Router
         return $this->variableRoutes;
     }
 
+    public function mountController($baseRoute, $controller)
+    {
+        if (is_string($controller)) {
+            $controller = new $controller;
+        }
+
+        $router = $controller->getRouter();
+
+        foreach ($router->getStaticRoutes() as $route => $methods) {
+            foreach ($methods as $method => $handler) {
+                $this->addStaticRoute($method, $baseRoute . $route, $handler);
+            }
+        }
+
+        $baseRoute = preg_quote($baseRoute, '~');
+
+        foreach ($router->getVariableRoutes() as $pattern => $methods) {
+            foreach ($methods as $method => $data) {
+                list($handler, $variables) = $data;
+
+                $this->addVariableRoute($method, [ $baseRoute . $pattern, $variables ], $handler);
+            }
+        }
+    }
+
     public function __call($name, array $arguments)
     {
         $name = strtoupper($name);

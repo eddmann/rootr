@@ -26,7 +26,7 @@ class PatternBuilderTest extends \PHPUnit_Framework_TestCase
 
         list($regEx, $variables) = $pattern;
 
-        assertThat($regEx, is(equalTo('~^/news/([^/]+)$~')));
+        assertThat($regEx, is(equalTo('/news/([^/]+)')));
 
         assertThat($variables, is(equalTo([ 'year' ])));
     }
@@ -39,13 +39,13 @@ class PatternBuilderTest extends \PHPUnit_Framework_TestCase
 
         list($regEx, $variables) = $pattern;
 
-        assertThat($regEx, is(equalTo('~^/news/(\d{4})$~')));
+        assertThat($regEx, is(equalTo('/news/(\d{4})')));
 
         assertThat($variables, is(equalTo([ 'year' ])));
 
-        assertThat(preg_match($regEx, '/news/2014'), is(true));
+        assertThat(preg_match('~^' . $regEx. '$~', '/news/2014'), is(true));
 
-        assertThat(preg_match($regEx, '/news/two-thousand-and-fourteen'), is(false));
+        assertThat(preg_match('~^' . $regEx. '$~', '/news/two-thousand-and-fourteen'), is(false));
     }
 
     public function testRouteWithMultipleVariables()
@@ -56,13 +56,13 @@ class PatternBuilderTest extends \PHPUnit_Framework_TestCase
 
         list($regEx, $variables) = $pattern;
 
-        assertThat($regEx, is(equalTo('~^/news/(\d{4})/(\d{2})/([^/]+)$~')));
+        assertThat($regEx, is(equalTo('/news/(\d{4})/(\d{2})/([^/]+)')));
 
         assertThat($variables, is(equalTo([ 'year', 'month', 'slug' ])));
 
-        assertThat(preg_match($regEx, '/news/2014/05/lastest-news'), is(true));
+        assertThat(preg_match('~^' . $regEx . '$~', '/news/2014/05/lastest-news'), is(true));
 
-        assertThat(preg_match($regEx, '/news/2014/05'), is(false));
+        assertThat(preg_match('~^' . $regEx . '$~', '/news/2014/05'), is(false));
     }
 
 }
