@@ -4,11 +4,15 @@ require 'vendor/autoload.php';
 
 $router = new Rootr\Router;
 
-$router->add('GET', '/products', function () {
+$router->get('/', function () {
+    return 'Index Page.';
+});
+
+$router->get('/products', function () {
     return 'Product Listings.';
 });
 
-$router->add('GET', '/products/{id:\d+}', function ($id) {
+$router->get('/products/{id:\d+}', function ($id) {
    return "Details for Product $id";
 });
 
