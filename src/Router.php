@@ -38,9 +38,14 @@ class Router
         $this->variableRoutes[$regEx][$method] = [ $handler, $variables ];
     }
 
-    public function getRoutes()
+    public function getStaticRoutes()
     {
-        return [ $this->staticRoutes, $this->variableRoutes ];
+        return $this->staticRoutes;
+    }
+
+    public function getVariableRoutes()
+    {
+        return $this->variableRoutes;
     }
 
 }

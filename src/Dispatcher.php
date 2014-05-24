@@ -4,11 +4,11 @@
 class Dispatcher
 {
 
-    protected $staticRoutes, $variableRoutes;
+    protected $router;
 
-    public function __construct(array $routes)
+    public function __construct(Router $router)
     {
-        list($this->staticRoutes, $this->variableRoutes) = $routes;
+        $this->router = $router;
     }
 
     public function dispatch($method, $uri)
@@ -26,8 +26,10 @@ class Dispatcher
 
     protected function dispatchStaticRoute($method, $uri)
     {
-        if (isset($this->staticRoutes[$uri][$method])) {
-            $handler = $this->staticRoutes[$uri][$method];
+        $routes = $this->router->getStaticRoutes();
+
+        if (isset($routes[$uri][$method])) {
+            $handler = $routes[$uri][$method];
 
             $response = $this->invokeHandler($handler);
 
@@ -43,16 +45,18 @@ class Dispatcher
 
     protected function dispatchVariableRoute($method, $uri)
     {
-        foreach ($this->variableRoutes as $pattern => $routes) {
+        $routes = $this->router->getVariableRoutes();
+
+        foreach ($routes as $pattern => $methods) {
             if (! preg_match($pattern, $uri, $matches)) {
                 continue;
             }
 
-            if (! isset($routes[$method])) {
+            if (! isset($methods[$method])) {
                 break;
             }
 
-            list($handler, $variables) = $routes[$method];
+            list($handler, $variables) = $methods[$method];
 
             $arguments = array_combine($variables, array_slice($matches, 1));
 
