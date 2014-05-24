@@ -48,4 +48,11 @@ class Router
         return $this->variableRoutes;
     }
 
+    public function __call($name, array $arguments)
+    {
+        $name = strtoupper($name);
+
+        call_user_func_array([ $this, 'add' ], array_merge([ $name ], $arguments));
+    }
+
 }
