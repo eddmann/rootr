@@ -4,7 +4,7 @@
 class Router
 {
 
-    protected $staticRoutes, $variableRoutes;
+    protected $staticRoutes = [], $variableRoutes = [];
 
     protected $patternBuilder;
 
