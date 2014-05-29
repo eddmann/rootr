@@ -4,7 +4,9 @@
 class Router
 {
 
-    protected $staticRoutes = [], $variableRoutes = [];
+    protected $staticRoutes = [];
+
+    protected $variableRoutes = [];
 
     protected $patternBuilder;
 
@@ -79,5 +81,4 @@ class Router
 
         call_user_func_array([ $this, 'add' ], array_merge([ $name ], $arguments));
     }
-
 }

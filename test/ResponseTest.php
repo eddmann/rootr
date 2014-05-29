@@ -36,5 +36,4 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         assertThat($this->readAttribute($response, 'headers'), is(equalTo([ 'Location' => 'url.com' ])));
     }
-
 }

@@ -81,5 +81,4 @@ class PatternBuilderTest extends \PHPUnit_Framework_TestCase
 
         assertThat(preg_match('~^' . $regEx . '$~', '/news/2014/05'), is(true));
     }
-
 }

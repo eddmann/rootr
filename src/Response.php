@@ -4,7 +4,11 @@
 class Response
 {
 
-    protected $status, $body, $headers;
+    protected $status;
+
+    protected $body;
+
+    protected $headers;
 
     public function __construct($status, $body = '', array $headers = [])
     {
@@ -23,5 +27,4 @@ class Response
 
         echo $this->body;
     }
-
 }

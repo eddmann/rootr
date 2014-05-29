@@ -85,5 +85,4 @@ class PatternBuilder
 
         return [ $pattern, $variables ];
     }
-
 }

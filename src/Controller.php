@@ -64,5 +64,4 @@ class Controller
 
         return $router;
     }
-
 }
