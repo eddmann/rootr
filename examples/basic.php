@@ -20,6 +20,12 @@ $router->get('/products/show/{id:\d+}/{?name}', function ($id, $name = 'na') {
     return "/products/show/$id/$name";
 });
 
+$router->get('/product.json', function () {
+    $product = json_encode([ 'name' => 'Cheese', 'value' => 12.55 ]);
+
+    return (new Rootr\Response(200, $product))->asJson();
+});
+
 $dispatcher = new Rootr\Dispatcher($router);
 
 $method = $_SERVER['REQUEST_METHOD'];
