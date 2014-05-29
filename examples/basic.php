@@ -1,30 +1,30 @@
 <?php
 
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
 $router = new Rootr\Router;
 
 $router->get('/', function () {
-    return 'Index Page.';
+   return '/';
 });
 
 $router->get('/products', function () {
-    return 'Product Listings.';
+    return '/products';
 });
 
 $router->get('/products/{id:\d+}', function ($id) {
-   return "Details for Product $id";
+   return "/products/$id";
 });
 
-$router->add('GET', '/products/first', function () {
-    return new Rootr\Response(302, '', [ 'Location' => '/products/1' ]);
+$router->get('/products/show/{id:\d+}/{?name}', function ($id, $name = 'na') {
+    return "/products/show/$id/$name";
 });
 
 $dispatcher = new Rootr\Dispatcher($router);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-$uri = '/' . trim($_SERVER['REQUEST_URI'], '/');
+$uri = '/' . trim(str_replace($_SERVER['SCRIPT_NAME'], '', $_SERVER['REQUEST_URI']), '/');
 
 $response = $dispatcher->dispatch($method, $uri);
 
