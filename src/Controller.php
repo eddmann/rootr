@@ -41,7 +41,7 @@ class Controller
 
             $method = new \ReflectionMethod($this, $methodName);
             $httpMethod = 'GET';
-            $isRoute = false;
+            $hasRoute = false;
 
             if ($comment = $method->getDocComment()) {
                 if (preg_match('~^[\s*]*\@method\s([^\s]+)~im', $comment, $match)) {
@@ -49,13 +49,13 @@ class Controller
                 }
                 if (preg_match('~^[\s*]*\@route\s([^\s]+)~im', $comment, $match)) {
                     $route = trim(array_pop($match));
-                    $isRoute = true;
+                    $hasRoute = true;
                 }
             }
 
-            foreach ($method->getParameters() as $parameter) {
-                if (! $parameter->isOptional()) {
-                    $route .= '/{' . $parameter->getName() . '}';
+            if (! $hasRoute) {
+                foreach ($method->getParameters() as $parameter) {
+                    $route .= '/{' . ($parameter->isOptional() ? '?' : '') . $parameter->getName() . '}';
                 }
             }
 

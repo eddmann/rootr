@@ -58,13 +58,7 @@ class Dispatcher
 
             list($handler, $variables) = $methods[$method];
 
-            var_dump($matches);
-
-            var_dump($variables);
-
-            $arguments = array_combine($variables, array_slice($matches, 1));
-
-            $response = $this->invokeHandler($handler, $arguments);
+            $response = $this->invokeHandler($handler, array_slice($matches, 1));
 
             if (! $response instanceof Response) {
                 $response = new Response(200, $response);
