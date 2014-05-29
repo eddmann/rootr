@@ -81,4 +81,9 @@ class Router
 
         call_user_func_array([ $this, 'add' ], array_merge([ $name ], $arguments));
     }
+
+    public static function getDSLPath()
+    {
+        return __DIR__ . '/DSL.php';
+    }
 }
