@@ -10,5 +10,5 @@ before_script:
   - composer install --prefer-dist --no-interaction --dev
 
 script:
-  - phpunit
-  - phpcs --standard=PSR2 --encoding=UTF-8 -p src/ test/
+  - ./vendor/bin/phpunit
+  - ./vendor/bin/phpcs --standard=PSR2 --encoding=UTF-8 -p src/ test/
