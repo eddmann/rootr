@@ -1,6 +1,8 @@
 <?php namespace Rootr;
 
 
+use \Jeremeamia\SuperClosure\SerializableClosure;
+
 class Router
 {
 
@@ -20,6 +22,10 @@ class Router
     public function add($method, $route, $handler)
     {
         $pattern = $this->patternBuilder->build($route);
+
+        if ($handler instanceof \Closure) {
+            $handler = new SerializableClosure($handler);
+        }
 
         if (is_string($pattern)) {
             $this->addStaticRoute($method, $pattern, $handler);
@@ -80,10 +86,5 @@ class Router
         $name = strtoupper($name);
 
         call_user_func_array([ $this, 'add' ], array_merge([ $name ], $arguments));
-    }
-
-    public static function getDSLPath()
-    {
-        return __DIR__ . '/DSL.php';
     }
 }
