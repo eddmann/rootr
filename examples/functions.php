@@ -17,7 +17,7 @@ $dispatch = Rootr\router(function (Rootr\Router $router) {
     });
 
 }, [
-    'cache' => false
+    'cache' => true
 ]);
 
 $method = $_SERVER['REQUEST_METHOD'];

@@ -9,14 +9,10 @@ function router(\Closure $callback, array $options = [])
 
     if ($options['cache'] && file_exists($options['cacheFile'])) {
         $router = unserialize(file_get_contents($options['cacheFile']));
-        echo 'cache';
     } else {
-        echo 'no cache';
         $router = new Router;
 
-        $response = $callback($router);
-
-        if (! is_null($response)) {
+        if (! is_null($response = $callback($router))) {
             $router = $response;
         }
 
