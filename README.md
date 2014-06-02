@@ -4,6 +4,7 @@ rootr
 _Routing URLs like a boss._
 
 [![Build Status](https://travis-ci.org/eddmann/rootr.svg?branch=master)](https://travis-ci.org/eddmann/rootr)
+[![Coverage Status](https://coveralls.io/repos/eddmann/rootr/badge.png?branch=master)](https://coveralls.io/r/eddmann/rootr?branch=master)
 
 ## Install
 
