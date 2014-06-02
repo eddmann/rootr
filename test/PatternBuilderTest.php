@@ -6,7 +6,7 @@ class PatternBuilderTest extends \PHPUnit_Framework_TestCase
 
     protected $instance;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->instance = new PatternBuilder;
     }
