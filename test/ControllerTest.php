@@ -30,10 +30,6 @@ class ControllerTest extends \PHPUnit_Framework_TestCase
 
         $router = $controller->getRouter();
 
-        $staticRoutes = $router->getStaticRoutes();
-
-        $variableRoutes = $router->getVariableRoutes();
-
         assertThat($router->getStaticRoutes(), is(equalTo(
             [ '' => [ 'GET' => [ 'Rootr\Fixtures\ProductController', 'indexAction' ] ] ]
         )));
