@@ -5,6 +5,7 @@ _Routing URLs like a boss._
 
 [![Build Status](https://travis-ci.org/eddmann/rootr.svg?branch=master)](https://travis-ci.org/eddmann/rootr)
 [![Coverage Status](https://coveralls.io/repos/eddmann/rootr/badge.png?branch=master)](https://coveralls.io/r/eddmann/rootr?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/eddmann/rootr/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/eddmann/rootr/?branch=master)
 
 ## Install
 
