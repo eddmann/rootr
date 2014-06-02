@@ -36,4 +36,20 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
 
         assertThat($this->readAttribute($response, 'headers'), is(equalTo([ 'Location' => 'url.com' ])));
     }
+
+    public function testSetContentTypeHeader()
+    {
+        $response = new Response(200);
+
+        $response->setHeader('Content-type', 'text/html');
+
+        assertThat($this->readAttribute($response, 'headers'), is(equalTo([ 'Content-type' => 'text/html' ])));
+    }
+
+    public function testJsonResponse()
+    {
+        $response = (new Response(200))->asJson();
+
+        assertThat($this->readAttribute($response, 'headers'), is(equalTo([ 'Content-type' => 'application/json' ])));
+    }
 }
