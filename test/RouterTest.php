@@ -34,7 +34,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $patternBuilder->shouldReceive('build')->andReturn('/products');
 
         $router = new Router($patternBuilder);
-        $router->add('GET', '/products', function () { return '/products'; });
+        $router->add('GET', '/products', function () {
+            return '/products';
+        });
 
         assertThat($router->getStaticRoutes(), arrayWithSize(1));
         assertThat($router->getStaticRoutes(), hasKeyInArray('/products'));
@@ -47,7 +49,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $patternBuilder->shouldReceive('build')->andReturn([ '/products/([^/]+)', [ 'id' ]]);
 
         $router = new Router($patternBuilder);
-        $router->add('GET', '/products/{id}', function ($id) { return "/products/$id"; });
+        $router->add('GET', '/products/{id}', function ($id) {
+            return "/products/$id";
+        });
 
         assertThat($router->getStaticRoutes(), emptyArray());
         assertThat($router->getVariableRoutes(), arrayWithSize(1));
@@ -60,7 +64,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $patternBuilder->shouldReceive('build')->andReturn([ '/products/(\d+)', [ 'id' ]]);
 
         $router = new Router($patternBuilder);
-        $router->add('GET', '/products/{id}', function ($id) { return "/products/$id"; });
+        $router->add('GET', '/products/{id}', function ($id) {
+            return "/products/$id";
+        });
 
         assertThat($router->getStaticRoutes(), emptyArray());
         assertThat($router->getVariableRoutes(), arrayWithSize(1));
@@ -75,9 +81,11 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
         $controllerRouter = \Mockery::mock('Rootr\Router');
         $controllerRouter->shouldReceive('getStaticRoutes')->andReturn(
-            [ '' => [ 'GET' => [ 'Rootr\ProductController', 'indexAction' ] ] ]);
+            [ '' => [ 'GET' => [ 'Rootr\ProductController', 'indexAction' ] ] ]
+        );
         $controllerRouter->shouldReceive('getVariableRoutes')->andReturn(
-            [ '/(\d+)' => [ 'GET' => [ [ 'Rootr\ProductController', 'showAction' ], [ 'id' ] ] ] ]);
+            [ '/(\d+)' => [ 'GET' => [ [ 'Rootr\ProductController', 'showAction' ], [ 'id' ] ] ] ]
+        );
 
         $controller = \Mockery::mock([ 'getRouter' => $controllerRouter ]);
 
